@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AeroRank — Beat the top score, take their place</title>
+    <meta name="description" content="Four one-tap arcade games. Out-score the player above you to take their spot on the weekly leaderboard — the prize board resets every Monday." />
+    <meta name="theme-color" content="#050913" />
+    <!-- Connect a CORS-enabled IAB VAST tag from your contracted ad provider.
+         No real ad, impression, or payment is claimed until a tag is supplied. -->
+    <script>window.AERORANK_AD_CONFIG = { vastTagUrl: "" };</script>
+
+    <!-- ===================================================================
+         Google Analytics (GA4)
+         Replace G-XXXXXXXXXX below with your Measurement ID. That is the only
+         edit needed — src/lib/analytics.ts reads it from window.GA_MEASUREMENT_ID.
+         The remote loader is skipped while the placeholder is in place, so the
+         offline build makes no network request, but gtag() still queues events.
+         =================================================================== -->
+    <script>
+      window.GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", window.GA_MEASUREMENT_ID, { send_page_view: true });
+
+      (function () {
+        var id = window.GA_MEASUREMENT_ID;
+        if (!id || id.indexOf("XXXX") !== -1) return; // placeholder — don't call out
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id);
+        document.head.appendChild(s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

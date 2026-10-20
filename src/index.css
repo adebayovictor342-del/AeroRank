@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../node_modules/@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@theme {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #050913;
+  --color-ink-900: #070d1a;
+  --color-ink-800: #0b1424;
+  --color-ink-700: #111c31;
+
+  --animate-rise: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pop: pop 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+  --animate-toast: toast 1.7s ease-out both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(10px) scale(0.92); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes toast {
+    0% { opacity: 0; transform: translateY(10px) scale(0.9); }
+    12% { opacity: 1; transform: none; }
+    80% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateY(-8px); }
+  }
+}
+
+html {
+  background: #050913;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: #e6ecf8;
+  background: #050913;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Page backdrop: soft colour glows + fine blueprint grid */
+.aero-bg {
+  background-color: #060b16;
+  background-image:
+    radial-gradient(60rem 32rem at 15% -10%, rgba(56, 217, 245, 0.10), transparent 60%),
+    radial-gradient(48rem 30rem at 95% 0%, rgba(155, 135, 245, 0.12), transparent 60%),
+    radial-gradient(40rem 26rem at 50% 105%, rgba(255, 209, 102, 0.06), transparent 60%);
+}
+
+.aero-grid {
+  background-image:
+    linear-gradient(to right, rgba(120, 160, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 160, 255, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 25%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 25%, #000 30%, transparent 85%);
+}
+
+.text-gradient-hero {
+  background-image: linear-gradient(90deg, #6ee7f9 0%, #7aa7ff 28%, #a58bf6 52%, #e4b2a2 78%, #ffd36e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background-image: linear-gradient(90deg, #ffd166, #ffae57);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-gradient {
+  background-image: linear-gradient(100deg, #2fd6f7 0%, #5b8cf5 55%, #8b7cf0 100%);
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(8px);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Light mode — scoped to the app shell (.aero-bg) so full-screen game */
+/* canvases and their overlays stay dark and readable.                 */
+/* ------------------------------------------------------------------ */
+html.light {
+  background: #eef2f7;
+  color-scheme: light;
+}
+
+html.light body {
+  background: #eef2f7;
+  color: #0f172a;
+}
+
+html.light .aero-bg {
+  background-color: #eef2f7;
+  background-image:
+    radial-gradient(60rem 32rem at 15% -10%, rgba(56, 217, 245, 0.20), transparent 60%),
+    radial-gradient(48rem 30rem at 95% 0%, rgba(155, 135, 245, 0.18), transparent 60%),
+    radial-gradient(40rem 26rem at 50% 105%, rgba(255, 180, 60, 0.16), transparent 60%);
+}
+
+html.light .aero-grid {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.07) 1px, transparent 1px);
+}
+
+html.light .aero-bg .glass {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+html.light .aero-bg ::-webkit-scrollbar-thumb { background: rgba(15, 23, 42, 0.18); }
+
+/* Text: dark-on-light remaps */
+html.light .aero-bg .text-white { color: #0f172a !important; }
+html.light .aero-bg .text-slate-200 { color: #334155 !important; }
+html.light .aero-bg .text-slate-300 { color: #475569 !important; }
+html.light .aero-bg .text-slate-400 { color: #64748b !important; }
+html.light .aero-bg .text-slate-500 { color: #64748b !important; }
+html.light .aero-bg .text-slate-600 { color: #94a3b8 !important; }
+html.light .aero-bg .text-cyan-100 { color: #0e7490 !important; }
+html.light .aero-bg .text-cyan-200 { color: #0e7490 !important; }
+html.light .aero-bg .text-cyan-300 { color: #0891b2 !important; }
+html.light .aero-bg .text-amber-100 { color: #92400e !important; }
+html.light .aero-bg .text-amber-200 { color: #b45309 !important; }
+html.light .aero-bg .text-violet-100 { color: #5b21b6 !important; }
+html.light .aero-bg .text-violet-200 { color: #6d28d9 !important; }
+html.light .aero-bg .text-rose-100 { color: #9f1239 !important; }
+html.light .aero-bg .text-rose-200 { color: #be123c !important; }
+html.light .aero-bg .text-emerald-200 { color: #047857 !important; }
+html.light .aero-bg .text-emerald-300 { color: #047857 !important; }
+html.light .aero-bg .text-rose-300 { color: #be123c !important; }
+
+/* Keep gradient text working in both themes */
+html.light .aero-bg .text-gradient-hero,
+html.light .aero-bg .text-gradient-gold {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Surfaces: translucent dark fills become light cards */
+html.light .aero-bg [class*="bg-ink-950"],
+html.light .aero-bg [class*="bg-ink-900"],
+html.light .aero-bg [class*="bg-ink-800"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+html.light .aero-bg [class*="bg-white/"] {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+html.light .aero-bg [class*="border-white"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Inputs stay readable */
+html.light .aero-bg input,
+html.light .aero-bg textarea,
+html.light .aero-bg select {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
+}
+html.light .aero-bg input::placeholder,
+html.light .aero-bg textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Keep primary gradient buttons dark-text on bright gradient */
+html.light .aero-bg .btn-gradient { color: #050913 !important; }
